@@ -10,6 +10,7 @@ export class BusStop {
     constructor(name, schedules) {
         this.name = name;
         this.schedules = schedules;
+        this.nearest = [];
     }
 
     getBuses() {
@@ -17,6 +18,11 @@ export class BusStop {
             return routes[key];
         });
     };
+
+    addNearest(stop: BusStop) {
+        this.nearest.push(stop);
+        stop.nearest.push(this);
+    }
 }
 
 export class Building {
@@ -47,10 +53,32 @@ const rawStops = [
     new BusStop("University Residences No. 3 & 4", { "3": [5, 12], "4": 9, "5": 7, "7": 2, "8": [5, 10] }),
     new BusStop("University Science Centre", { "8": 7 }),
     new BusStop("University Sports Centre", { "1A": 2, "1B": 3, "2": 2, "3": 2, "5": 2 }),
-    new BusStop("Yasumoto International Academic Park", { "3": 1, "4": 1 })
+    new BusStop("Yasumoto International Academic Park - YIA", { "3": 1, "4": 1 })
 ];
 
-const rawBuildings = `Academic Building No. 1	14	
+const addToRoute = function(element) {
+    if (routes[this[0]] === undefined) {
+        routes[this[0]] = [];
+    }
+    routes[this[0]][element - 1] = this[1];
+};
+
+for (let i = 0; i < rawStops.length; i++) {
+    const stop = rawStops[i];
+    stops[stop.name] = stop;
+    for (var bus in stop.schedules) {
+        if (stop.schedules.hasOwnProperty(bus)) {
+            (Array.isArray(stop.schedules[bus]) ? stop.schedules[bus] : [stop.schedules[bus]]).forEach(addToRoute, [bus, stop]);
+        }
+    }
+}
+
+stops["University Administration Building"].addNearest(stops["Sir Run Run Shaw Hall"]);
+stops["Entrance Piazza"].addNearest(stops["Yasumoto International Academic Park - YIA"]);
+
+
+const rawBuildings = `University MTR Station	15, 20
+Academic Building No. 1	14
 Academic Building No. 2	7	
 Adam Schall Residence	3	
 An Integrated Teaching Building - AIT	20	
@@ -218,19 +246,3 @@ rawBuildings.split("\n").forEach(function (line) {
     buildings[name] = new Building(name, buses);
 });
 
-function addToRoute(element) {
-    if (routes[this[0]] === undefined) {
-        routes[this[0]] = [];
-    }
-    routes[this[0]][element - 1] = this[1];
-};
-
-for (let i = 0; i < rawStops.length; i++) {
-    const stop = rawStops[i];
-    stops[stop.name] = stop;
-    for (var bus in stop.schedules) {
-        if (stop.schedules.hasOwnProperty(bus)) {
-            (Array.isArray(stop.schedules[bus]) ? stop.schedules[bus] : [stop.schedules[bus]]).forEach(addToRoute, [bus, stop]);
-        }
-    }
-}

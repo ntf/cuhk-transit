@@ -8,6 +8,10 @@ import DevTools from './containers/DevTools';
 import './index.css';
 import process from 'process';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import ga from 'react-ga';
+ga.initialize('UA-3215015-7');
+ga.pageview(document.location.pathname);
 injectTapEventPlugin();
 
 let initialState = {};
