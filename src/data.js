@@ -1,6 +1,6 @@
 /**
  * @author ntf
- * data extracted from spreadsheet prepared by Jonathan L. 
+ * data extracted from spreadsheet prepared by Jonathan L.
  */
 export let routes = {};
 export let stops = {};
@@ -32,31 +32,40 @@ export class Building {
     }
 }
 
-
 const rawStops = [
-    new BusStop("Area 39", { "4": 3 }),
-    new BusStop("C.W. Chu College", { "3": 7, "4": [2, 4], "5": 9, "6B": 1, "8": 1 }),
-    new BusStop("Chan Chun Ha Hostel", { "3": 10, "4": 7, "6B": 3, "8": 3 }),
-    new BusStop("Chung Chi Teaching Blocks", { "5": 1, "6A": 6, "6B": 9, "7": 8 }),
-    new BusStop("Entrance Piazza", { "2": 1, "3": 15, "6A": 5, "6B": 8, "7": 7 }),
-    new BusStop("Fung King-hey Building", { "2": 3, "3": 4, "5": 4 }),
-    new BusStop("Jockey Club Postgraduate Hall", { "1B": [2, 7] }),
-    new BusStop("New Asia College", { "2": 5, "4": 10, "5": 6, "6A": 1, "6B": 4, "7": 3, "8": 8 }),
-    new BusStop("S.H. Ho College", { "1A": 5, "1B": 6, "2": 8, "3": 14, "4": 13, "6A": 4, "6B": 7, "7": 6 }),
-    new BusStop("Shaw College", { "3": [6, 11], "4": 8, "5": 8, "7": 1, "8": [4, 11] }),
-    new BusStop("Sir Run Run Shaw Hall", { "1A": 3, "1B": 4, "3": 3, "5": 3 }),
-    new BusStop("United College", { "2": [4, 6], "4": 11, "5": 5, "6A": 2, "6B": 5, "7": 4, "8": 9 }),
-    new BusStop("United College Staff Residence", { "3": 9, "4": 6, "6B": 2, "8": 2 }),
-    new BusStop("University Administration Building", { "1A": 4, "1B": 5, "2": 7, "3": 13, "4": 12, "6A": 3, "6B": 6, "7": 5, "8": 6 }),
-    new BusStop("University MTR Station", { "1A": [1, 6], "1B": [1, 8], "2": 9, "4": 14 }),
-    new BusStop("University Residences No. 15", { "3": 8, "4": 5 }),
-    new BusStop("University Residences No. 3 & 4", { "3": [5, 12], "4": 9, "5": 7, "7": 2, "8": [5, 10] }),
-    new BusStop("University Science Centre", { "8": 7 }),
-    new BusStop("University Sports Centre", { "1A": 2, "1B": 3, "2": 2, "3": 2, "5": 2 }),
-    new BusStop("Yasumoto International Academic Park - YIA", { "3": 1, "4": 1 })
+    new BusStop("Area 39", {"4": 3}),
+    new BusStop("C.W. Chu College", {"3": 7, "4": [2, 4], "5": 9, "6B": 1, "8": 1}),
+    new BusStop("Chan Chun Ha Hostel", {"3": 10, "4": 7, "6B": 3, "8": 3}),
+    new BusStop("Chung Chi Teaching Blocks", {"5": 1, "6A": 6, "6B": 9, "7": 8}),
+    new BusStop("Entrance Piazza", {"2": 1, "3": 15, "6A": 5, "6B": 8, "7": 7}),
+    new BusStop("Fung King-hey Building", {"2": 3, "3": 4, "5": 4}),
+    new BusStop("Jockey Club Postgraduate Hall", {"1B": [2, 7]}),
+    new BusStop("New Asia College", {"2": 5, "4": 10, "5": 6, "6A": 1, "6B": 4, "7": 3, "8": 8}),
+    new BusStop("S.H. Ho College", {"1A": 5, "1B": 6, "2": 8, "3": 14, "4": 13, "6A": 4, "6B": 7, "7": 6}),
+    new BusStop("Shaw College", {"3": [6, 11], "4": 8, "5": 8, "7": 1, "8": [4, 11]}),
+    new BusStop("Sir Run Run Shaw Hall", {"1A": 3, "1B": 4, "3": 3, "5": 3}),
+    new BusStop("United College", {"2": [4, 6], "4": 11, "5": 5, "6A": 2, "6B": 5, "7": 4, "8": 9}),
+    new BusStop("United College Staff Residence", {"3": 9, "4": 6, "6B": 2, "8": 2}),
+    new BusStop("University Administration Building", {
+        "1A": 4,
+        "1B": 5,
+        "2": 7,
+        "3": 13,
+        "4": 12,
+        "6A": 3,
+        "6B": 6,
+        "7": 5,
+        "8": 6
+    }),
+    new BusStop("University MTR Station", {"1A": [1, 6], "1B": [1, 8], "2": 9, "4": 14}),
+    new BusStop("University Residences No. 15", {"3": 8, "4": 5}),
+    new BusStop("University Residences No. 3 & 4", {"3": [5, 12], "4": 9, "5": 7, "7": 2, "8": [5, 10]}),
+    new BusStop("University Science Centre", {"8": 7}),
+    new BusStop("University Sports Centre", {"1A": 2, "1B": 3, "2": 2, "3": 2, "5": 2}),
+    new BusStop("Yasumoto International Academic Park - YIA", {"3": 1, "4": 1})
 ];
 
-const addToRoute = function(element) {
+const addToRoute = function (element) {
     if (routes[this[0]] === undefined) {
         routes[this[0]] = [];
     }
