@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import Layout from '../Layout/Layout';
 import Subheader from 'material-ui/Subheader';
 import {List, ListItem} from 'material-ui/List';
@@ -12,20 +12,22 @@ import WalkAsset from 'material-ui/svg-icons/maps/directions-walk';
 import BusAsset from 'material-ui/svg-icons/maps/directions-bus';
 import PlaceAsset from 'material-ui/svg-icons/maps/place';
 import './App.css';
-import {routes, stops, buildings, Building, BusStop} from '../../data';
+import {/*routes, stops,*/ buildings, /*Building,*/ BusStop} from '../../data';
 
+const muiTheme = getMuiTheme({
+    appBar: {
+        color:'#73216D'
+    }
+});
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     getDirections() {
         this.props.getDirections(this.props.from, this.props.to);
     }
 
     componentDidUpdate() {
-        if (this.props.location.from != this.props.from || this.props.location.to != this.props.to) {
+        if (this.props.location.from !== this.props.from || this.props.location.to !== this.props.to) {
             this.getDirections();
         }
     }
@@ -38,18 +40,18 @@ class App extends React.Component {
 
     render() {
         let location = this.props.location;
-        return <MuiThemeProvider>
+        return <MuiThemeProvider muiTheme={muiTheme}>
             <Layout>
                 <div className="App">
                     <div className="App-intro" style={{ textAlign: 'left' }}>
                         <SelectField value={this.props.from} onChange={this.props.onSelectFrom} fullWidth={true}
-                                     floatingLabelText='From building'>
+                                     floatingLabelText='From building' floatingLabelFixed={true} hintText='Choose starting point'>
                             {Object.keys(buildings).map(function (name) {
                                 return <MenuItem key={name} value={buildings[name].name} primaryText={name}/>
                             }) }
                         </SelectField>
                         <SelectField value={this.props.to} onChange={this.props.onSelectTo} fullWidth={true}
-                                     floatingLabelText='To building'>
+                                     floatingLabelText='To building' floatingLabelFixed={true} hintText='Choose destination'>
                             {Object.keys(buildings).map(function (name) {
                                 return <MenuItem key={name} value={buildings[name].name} primaryText={name}/>
                             }) }
