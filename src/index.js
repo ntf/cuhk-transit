@@ -11,7 +11,7 @@ import ga from 'react-ga';
 import {Router, Route, useRouterHistory} from 'react-router';
 import { createHashHistory } from 'history';
 import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-router-redux';
-
+import runtime from 'offline-plugin/runtime';
 
 injectTapEventPlugin();
 
@@ -27,6 +27,22 @@ let middlewares;
 let store;
 
 if (document.location.hostname !== "localhost") {
+    runtime.install({
+        onUpdating: () =>{
+            console.log('SW Event:', 'onUpdating');
+        },
+        onUpdateReady: () =>{
+            console.log('SW Event:', 'onUpdateReady');
+            runtime.applyUpdate();
+        },
+        onUpdated: () =>{
+            console.log('SW Event:', 'onUpdated');
+            window.location.reload();
+        },
+        onUpdateFailed: () =>{
+            console.log('SW Event:', 'onUpdateFailed');
+        }
+    });
     ga.initialize('UA-3215015-7');
     ga.pageview(document.location.pathname);
     middlewares = applyMiddleware(
